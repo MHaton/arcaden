@@ -7,12 +7,12 @@ switch (state) {
                 switch (tempTerrain.type) {
                     case "wall":
                         type = "wall";
-                        sprite_index = spr_wall;
+                        instance_change(obj_wall,true);
                         passable = false;
                         break;
                     case "difficult":
                         type = "difficult";
-                        sprite_index = spr_rubble;
+                        instance_change(obj_rubble,true);
                         cost = 2;
                         break;
                 }
@@ -52,9 +52,26 @@ switch (state) {
 			}
 			currentActor = ds_list_find_value(turnOrder, turnCounter);
 			currentActor.actions = 2;
-			obj_cursor.selectedActor = currentActor;
-			
+			currentActor.canAct = 2;
+			//only give control if the character is a friendly
+			//otherwise, flash and alarm
+			if (currentActor.army = BLUE_ARMY){
+				obj_cursor.selectedActor = currentActor;
+			}else{
+			currentActor.flash = true;
+			currentActor.alarm[0] = 60;
+			}
 			scr_movementRange(map[currentActor.gridX, currentActor.gridY], currentActor.move, currentActor.actions);
+			
+			switch (currentActor.attackType){
+				case "ranged":
+					scr_rangedAttackRange(currentActor);
+				break;
+				case "melee":
+					scr_meleeAttackRange(currentActor);
+				break;
+			
+			}
 		}
         break;
 }

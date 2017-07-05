@@ -1,5 +1,7 @@
 state = "initialising";
 
+draw_set_font(fnt_default);
+
 randomize();
 
 turnOrder = ds_list_create();

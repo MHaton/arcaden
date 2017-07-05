@@ -18,8 +18,9 @@ parent = noone;
 // distance from the source node
 G = 0;
 
-// this isn't where we're going
+// this isn't where we're going, or attacking
 moveNode = false;
+attackNode = false;
 
 
 cost = 1;
